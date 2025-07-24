@@ -1,10 +1,27 @@
+# Don't include dependencies (they will be installed in Docker)
 node_modules
+
+# Environment and credentials
 .env
+
+# Git repo files
 .git
-.dockerignore
+.gitignore
+
+# Docker files
 Dockerfile
-README.md
+.dockerignore
+
+# OS & editor junk
 *.log
-# Keep schema, ignore local DB
+*.swp
+*.swo
+*.DS_Store
+*.vscode
+
+# Prisma local development database
 prisma/dev.db
 prisma/dev.sqlite
+
+# Prisma Studio settings (optional)
+.prisma
