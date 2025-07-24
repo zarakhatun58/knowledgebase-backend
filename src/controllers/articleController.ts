@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
+import axios from 'axios';
 
 const prisma = new PrismaClient();
 
@@ -55,13 +56,36 @@ export const summarizeArticle = async (req: Request, res: Response) => {
       where: { id: articleId, authorId: userId },
     });
 
-    if (!article) return res.status(404).json({ error: 'Article not found' });
+    if (!article) return res.status(404).json({ error: "Article not found" });
 
-    // Dummy AI summarization (replace with real API later)
-    const summary = article.body.slice(0, 100) + '...';
+    const geminiApiKey = process.env.GEMINI_API_KEY;
 
-    res.json({ summary });
+    const response = await axios.post(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`,
+      {
+        contents: [
+          {
+            parts: [
+              {
+                text: `Summarize the following article:\n\n${article.body}`,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const summary =
+      response.data?.candidates?.[0]?.content?.parts?.[0]?.text || "No summary available.";
+
+    res.json({ summary }); // ✅ now declared and safe
   } catch (err) {
-    res.status(500).json({ error: 'Summarization failed' });
+    console.error("Summarization error:", err);
+    res.status(500).json({ error: "AI summarization failed" });
   }
 };

@@ -1,0 +1,10 @@
+node_modules
+.env
+.git
+.dockerignore
+Dockerfile
+README.md
+*.log
+# Keep schema, ignore local DB
+prisma/dev.db
+prisma/dev.sqlite

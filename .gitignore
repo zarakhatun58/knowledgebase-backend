@@ -9,7 +9,7 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
-
+.env
 # testing
 /coverage
 
@@ -34,8 +34,13 @@ yarn-error.log*
 .env
 
 # vercel
-.vercel
-
+node_modules
+.env
+dist
+*.log
+# Prisma related
+prisma/dev.db
+prisma/dev.sqlite
 # typescript
 *.tsbuildinfo
 next-env.d.ts
