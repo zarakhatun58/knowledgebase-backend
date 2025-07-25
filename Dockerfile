@@ -8,10 +8,10 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copy rest of the app code
+# Copy the rest of the app
 COPY . .
 
-# Generate Prisma client
+# Generate Prisma client again (in case needed inside container)
 RUN npx prisma generate
 
 # Expose backend port

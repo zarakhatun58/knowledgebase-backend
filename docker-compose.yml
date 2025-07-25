@@ -1,27 +1,13 @@
-services:
-  db:
-    image: postgres:15
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: knowledgebase
-    ports:
-      - '5432:5432'
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+version: "3.9"
 
+services:
   backend:
     build: .
     ports:
-      - '5000:5000'
+      - "5001:5000"  # External : Internal (you'll access via localhost:5001)
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/knowledgebase
-      JWT_SECRET: your_jwt_secret
-    depends_on:
-      - db
+      - DATABASE_URL=postgresql://knowledgebase_9hh8_user:R7wDFCMGb9XVeXJgp6Zl9faiXBGGzbYR@dpg-d21oknnfte5s73fsi66g-a/knowledgebase_9hh8
+      - JWT_SECRET=your_jwt_secret
     volumes:
       - .:/app
-
-volumes:
-  postgres_data:
+    command: npm run dev  # You can keep this here or in Dockerfile CMD

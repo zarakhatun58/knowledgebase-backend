@@ -24,4 +24,4 @@ prisma/dev.db
 prisma/dev.sqlite
 
 # Prisma Studio settings (optional)
-.prisma
+-.prisma
