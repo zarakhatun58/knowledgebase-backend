@@ -70,6 +70,7 @@ Authorization: Bearer <your-token>
 # unit test for loginand sign up
 
 # CI/CD pipeline
+.github/workflows/ci.yml build
 
 Linting with ESLint
 
@@ -80,6 +81,8 @@ Testing with Jest
 npm run lint # To lint your code
 npm run format # To auto-format
 npm test # To run tests
+
+
 
 server deploy link :
 : https://knowledgebase-backend-ombg.onrender.com
