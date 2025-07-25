@@ -1,9 +1,6 @@
 # Don't include dependencies (they will be installed in Docker)
 node_modules
 
-# Environment and credentials
-.env
-
 # Git repo files
 .git
 .gitignore
