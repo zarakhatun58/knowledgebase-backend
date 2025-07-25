@@ -34,6 +34,9 @@ app.use('/api/gemini', geminiRoutes);
 // ✅ Gemini test endpoint (optional)
 
 const PORT = process.env.PORT || 5000;
+app.get('/', (req, res) => {
+  res.send(`🚀 Knowledge Base API is running! ${PORT}`);
+});
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 export default app;
