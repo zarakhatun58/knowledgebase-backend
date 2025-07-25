@@ -17,7 +17,9 @@ export const signup = async (req: Request, res: Response) => {
       data: { email, password: hashedPassword },
     });
 
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, { expiresIn: '1d' });
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
+      expiresIn: '1d',
+    });
 
     res.status(201).json({ token });
   } catch (err) {
@@ -34,7 +36,9 @@ export const login = async (req: Request, res: Response) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.status(401).json({ message: 'Invalid credentials' });
 
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, { expiresIn: '1d' });
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
+      expiresIn: '1d',
+    });
 
     res.status(200).json({ token });
   } catch (err) {

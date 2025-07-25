@@ -56,7 +56,7 @@ export const summarizeArticle = async (req: Request, res: Response) => {
       where: { id: articleId, authorId: userId },
     });
 
-    if (!article) return res.status(404).json({ error: "Article not found" });
+    if (!article) return res.status(404).json({ error: 'Article not found' });
 
     const geminiApiKey = process.env.GEMINI_API_KEY;
 
@@ -75,17 +75,18 @@ export const summarizeArticle = async (req: Request, res: Response) => {
       },
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       }
     );
 
     const summary =
-      response.data?.candidates?.[0]?.content?.parts?.[0]?.text || "No summary available.";
+      response.data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      'No summary available.';
 
     res.json({ summary }); // ✅ now declared and safe
   } catch (err) {
-    console.error("Summarization error:", err);
-    res.status(500).json({ error: "AI summarization failed" });
+    console.error('Summarization error:', err);
+    res.status(500).json({ error: 'AI summarization failed' });
   }
 };

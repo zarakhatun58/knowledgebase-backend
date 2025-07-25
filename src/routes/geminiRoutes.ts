@@ -1,12 +1,11 @@
 // routes/geminiRoutes.js
-import express from "express";
-import axios from "axios";
+import express from 'express';
+import axios from 'axios';
 
 const router = express.Router();
 
-
-router.post("/ask", async (req, res) => {
-  console.log("Received POST /api/gemini/ask");
+router.post('/ask', async (req, res) => {
+  console.log('Received POST /api/gemini/ask');
 
   const { prompt } = req.body;
   const apiKey = process.env.GEMINI_API_KEY;
@@ -23,7 +22,7 @@ router.post("/ask", async (req, res) => {
       },
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -31,8 +30,8 @@ router.post("/ask", async (req, res) => {
     const output = response.data;
     res.json(output);
   } catch (error) {
-    console.error("Gemini API error:", error);
-    res.status(500).json({ error: "Gemini API request failed." });
+    console.error('Gemini API error:', error);
+    res.status(500).json({ error: 'Gemini API request failed.' });
   }
 });
 
